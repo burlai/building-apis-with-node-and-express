@@ -1,3 +1,5 @@
+import { addNewContact, getContacts } from "../controllers/controller";
+
 const routes = (expressApp) => {
 
     expressApp.route('/contact')
@@ -8,13 +10,9 @@ const routes = (expressApp) => {
             console.log(`Request type: ${req.method}`);
 
             next();
-        }, (req, res) => {
-            res.send('GET request successfull');
-        })
+        }, getContacts) // passing controller functionality to interact with mongoDB
         
-        .post((req, res) => {
-            res.send('POST request successfull');
-        });
+        .post(addNewContact); // passing controller functionality to interact with mongoDB
 
     expressApp.route('/contact/:contactId')
         .put((req, res) => {
